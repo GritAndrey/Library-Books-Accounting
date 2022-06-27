@@ -3,15 +3,16 @@ package ru.andreygri.librarybooksaccounting.model;
 public class Book extends AbstractNamedEntity {
 
     private String author;
-    private String year;
+    private int year;
     private Integer userId = null;
 
-    public Book(Integer id, String name, String author, String year) {
+    public Book(Integer id, String name, String author, int year) {
         super(id, name);
         this.author = author;
         this.year = year;
     }
-    public Book(){
+
+    public Book() {
     }
 
     public Integer getUserId() {
@@ -30,11 +31,11 @@ public class Book extends AbstractNamedEntity {
         this.author = author;
     }
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(int year) {
         this.year = year;
     }
 

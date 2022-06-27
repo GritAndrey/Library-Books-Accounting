@@ -27,6 +27,7 @@ public class JdbcBookRepository implements BookRepository {
                 .withTableName("books")
                 .usingGeneratedKeyColumns("id");
     }
+
     @Override
     public Book save(Book book) {
         BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(book);
@@ -34,7 +35,7 @@ public class JdbcBookRepository implements BookRepository {
             Number newKey = insertBook.executeAndReturnKey(parameterSource);
             book.setId(newKey.intValue());
         } else if (namedParameterJdbcTemplate.update(
-                "UPDATE book SET  name=:name,year=:year,author=:author WHERE id=:id", parameterSource) == 0) {
+                "UPDATE book SET  name=:name, author=:author, year=:year WHERE id=:id", parameterSource) == 0) {
             return null;
         }
         return book;
