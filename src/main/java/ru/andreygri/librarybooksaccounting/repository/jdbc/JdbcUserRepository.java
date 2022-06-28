@@ -13,6 +13,7 @@ import ru.andreygri.librarybooksaccounting.model.User;
 import ru.andreygri.librarybooksaccounting.repository.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class JdbcUserRepository implements UserRepository {
@@ -63,5 +64,10 @@ public class JdbcUserRepository implements UserRepository {
     public List<Book> getUserBooks(int id) {
         return jdbcTemplate.query("SELECT * FROM book WHERE user_id = ?",
                 BeanPropertyRowMapper.newInstance(Book.class), id);
+    }
+
+    @Override
+    public Optional<User> getUserByName(String name) {
+        return jdbcTemplate.query("SELECT * FROM users WHERE name=? ", ROW_MAPPER, name).stream().findAny();
     }
 }

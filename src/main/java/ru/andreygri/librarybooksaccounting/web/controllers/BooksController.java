@@ -77,6 +77,21 @@ public class BooksController {
         return "redirect:/books";
     }
 
+    @GetMapping("/new")
+    public String create(@ModelAttribute("book") Book book) {
+        return "/books/new";
+    }
+    @PostMapping
+    public String create(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult) {
+        log.info("Controller POST New Book: " + book);
+
+        if (bindingResult.hasErrors()) {
+            return "/books/new";
+        }
+        bookRepository.save(book);
+        return "redirect:/books";
+    }
+
     @PatchMapping("/{id}/release")
     public String release(@PathVariable("id") int id) {
         bookRepository.release(id);

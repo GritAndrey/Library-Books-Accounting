@@ -26,8 +26,10 @@ public class JdbcBookRepository implements BookRepository {
         this.jdbcTemplate = jdbcTemplate;
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
         this.insertBook = new SimpleJdbcInsert(jdbcTemplate)
-                .withTableName("books")
-                .usingGeneratedKeyColumns("id");
+                .withTableName("book")
+                .usingGeneratedKeyColumns("id")
+                .usingColumns("name","author","year");
+
     }
 
     @Override

@@ -1,7 +1,11 @@
 package ru.andreygri.librarybooksaccounting.model;
 
-public class Book extends AbstractNamedEntity {
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
+public class Book extends AbstractNamedEntity {
+    @NotEmpty(message = "Author can`t be blank")
+    @Size(min = 2, max = 100, message = "Author name length must be between 2 and 100")
     private String author;
     private int year;
 

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface BookRepository {
     // null if not found, when updated
-    Book save(Book user);
+    Book save(Book book);
 
     // false if not found
     boolean delete(int id);

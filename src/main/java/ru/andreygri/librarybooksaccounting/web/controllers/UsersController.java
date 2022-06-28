@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.andreygri.librarybooksaccounting.model.User;
 import ru.andreygri.librarybooksaccounting.repository.UserRepository;
+import ru.andreygri.librarybooksaccounting.util.UserValidator;
 
 import javax.validation.Valid;
 
@@ -17,10 +18,12 @@ import javax.validation.Valid;
 public class UsersController {
     private static final Logger log = LoggerFactory.getLogger(UsersController.class);
     private final UserRepository repository;
+    private final UserValidator userValidator;
 
     @Autowired
-    public UsersController(UserRepository repository) {
+    public UsersController(UserRepository repository, UserValidator userValidator) {
         this.repository = repository;
+        this.userValidator = userValidator;
     }
 
     @GetMapping
@@ -58,11 +61,27 @@ public class UsersController {
                          BindingResult bindingResult,
                          @PathVariable int id) {
 
-        //userValidator.validate(user, bindingResult);
+        userValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
             return "/users/edit";
         }
         log.info("Edit user" + user);
+        repository.save(user);
+        return "redirect:/users";
+    }
+
+    @GetMapping("/new")
+    public String create(@ModelAttribute("user") User user) {
+        return "/users/new";
+    }
+
+    @PostMapping
+    public String create(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+        log.info("Controller POST New Book: " + user);
+        userValidator.validate(user, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "/books/new";
+        }
         repository.save(user);
         return "redirect:/users";
     }
