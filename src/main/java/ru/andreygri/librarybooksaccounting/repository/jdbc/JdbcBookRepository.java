@@ -28,7 +28,7 @@ public class JdbcBookRepository implements BookRepository {
         this.insertBook = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("book")
                 .usingGeneratedKeyColumns("id")
-                .usingColumns("name","author","year");
+                .usingColumns("name", "author", "year");
 
     }
 

@@ -10,25 +10,22 @@ import ru.andreygri.librarybooksaccounting.repository.UserRepository;
 @Component
 public class UserValidator implements Validator {
 
+    private final UserRepository repository;
 
-        private final UserRepository repository;
-
-        @Autowired
-        public UserValidator(UserRepository repository) {
-            this.repository = repository;
-        }
-
-        @Override
-        public boolean supports(Class<?> aClass) {
-            return User.class.equals(aClass);
-        }
-
-        @Override
-        public void validate(Object o, Errors errors) {
-            User user = (User) o;
-
-            if (repository.getUserByName(user.getName()).isPresent())
-                errors.rejectValue("name", "", "Username already exists");
-        }
+    @Autowired
+    public UserValidator(UserRepository repository) {
+        this.repository = repository;
     }
 
+    @Override
+    public boolean supports(Class<?> aClass) {
+        return User.class.equals(aClass);
+    }
+
+    @Override
+    public void validate(Object o, Errors errors) {
+        User user = (User) o;
+        if (repository.getUserByName(user.getName()).isPresent())
+            errors.rejectValue("name", "", "Username already exists");
+    }
+}

@@ -1,12 +1,9 @@
 package ru.andreygri.librarybooksaccounting.repository;
 
 
-
-import org.springframework.core.annotation.MergedAnnotation;
 import ru.andreygri.librarybooksaccounting.model.Book;
 import ru.andreygri.librarybooksaccounting.model.User;
 
-import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +19,7 @@ public interface UserRepository {
 
     List<User> getAll();
 
-   List<Book> getUserBooks(int id);
+    List<Book> getUserBooks(int id);
 
     Optional<User> getUserByName(String name);
 }

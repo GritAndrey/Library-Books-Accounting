@@ -27,6 +27,7 @@ public class SpringMVCDispatcherServletInitializer extends AbstractAnnotationCon
     }
 
     @Override
+
     public void onStartup(ServletContext aServletContext) throws ServletException {
         super.onStartup(aServletContext);
         registerCharacterEncodingFilter(aServletContext);
@@ -35,7 +36,7 @@ public class SpringMVCDispatcherServletInitializer extends AbstractAnnotationCon
 
     private void registerHiddenFieldFilter(ServletContext aContext) {
         aContext.addFilter("hiddenHttpMethodFilter",
-                new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null ,true, "/*");
+                new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null, true, "/*");
     }
 
     private void registerCharacterEncodingFilter(ServletContext aContext) {

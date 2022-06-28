@@ -68,7 +68,6 @@ public class BooksController {
                          BindingResult bindingResult,
                          @PathVariable int id) {
 
-        //bookValidator.validate(book, bindingResult);
         if (bindingResult.hasErrors()) {
             return "/books/edit";
         }
@@ -81,6 +80,7 @@ public class BooksController {
     public String create(@ModelAttribute("book") Book book) {
         return "/books/new";
     }
+
     @PostMapping
     public String create(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult) {
         log.info("Controller POST New Book: " + book);

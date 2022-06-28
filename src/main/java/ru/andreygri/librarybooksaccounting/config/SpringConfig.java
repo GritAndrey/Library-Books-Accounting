@@ -25,7 +25,7 @@ import java.util.Objects;
 @PropertySource("classpath:db/postgres.properties")
 @EnableWebMvc
 @Configuration
-public class SpringConfig implements WebMvcConfigurer{
+public class SpringConfig implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
     private final Environment environment;
 
