@@ -4,3 +4,6 @@ target
 *.iml
 log
 *.patch
+
+/src/main/resources/db/initDB.sql
+/src/main/resources/db/populateDB.sql
