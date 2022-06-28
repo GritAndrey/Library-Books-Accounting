@@ -20,7 +20,7 @@
 <div th:if="${users}">
     <span>This book is free. To whom should it be assigned?</span>
     <form th:method="PATCH" th:action="@{/books/{id}/assign(id=${book.getId()})}">
-        <label for="user">Выберите человека</label>
+        <label for="user">Choose user</label>
         <select th:object="${user}" th:field="*{id}" id="user">
             <option th:each="user : ${users}" th:value="${user.getId()}" th:text="${user.getName()}">
             </option>

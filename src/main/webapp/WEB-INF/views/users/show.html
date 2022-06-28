@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>User</title>
+    <title th:text="${user.getName()}">User</title>
 </head>
 <body>
 <p th:text="${'Name: '+ user.getName()}"></p>

@@ -7,6 +7,9 @@ import org.springframework.validation.Validator;
 import ru.andreygri.librarybooksaccounting.model.User;
 import ru.andreygri.librarybooksaccounting.repository.UserRepository;
 
+import java.util.Objects;
+import java.util.Optional;
+
 @Component
 public class UserValidator implements Validator {
 
@@ -25,7 +28,8 @@ public class UserValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         User user = (User) o;
-        if (repository.getUserByName(user.getName()).isPresent())
+        final Optional<User> userByName = repository.getUserByName(user.getName());
+        if (userByName.isPresent() && !Objects.equals(userByName.get().getId(), user.getId()))
             errors.rejectValue("name", "", "Username already exists");
     }
 }
