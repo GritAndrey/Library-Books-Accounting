@@ -34,6 +34,7 @@ public class UsersController {
     public String getById(@PathVariable int id, Model model) {
         log.info("users getById  Id: " + id);
         model.addAttribute("user", repository.get(id));
+        model.addAttribute("books", repository.getUserBooks(id));
         return "users/show";
     }
 

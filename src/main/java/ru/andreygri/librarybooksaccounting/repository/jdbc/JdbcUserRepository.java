@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import ru.andreygri.librarybooksaccounting.model.Book;
 import ru.andreygri.librarybooksaccounting.model.User;
 import ru.andreygri.librarybooksaccounting.repository.UserRepository;
 
@@ -56,5 +57,11 @@ public class JdbcUserRepository implements UserRepository {
     @Override
     public List<User> getAll() {
         return jdbcTemplate.query("SELECT * FROM users ORDER BY name", ROW_MAPPER);
+    }
+
+    @Override
+    public List<Book> getUserBooks(int id) {
+        return jdbcTemplate.query("SELECT * FROM book WHERE user_id = ?",
+                BeanPropertyRowMapper.newInstance(Book.class), id);
     }
 }

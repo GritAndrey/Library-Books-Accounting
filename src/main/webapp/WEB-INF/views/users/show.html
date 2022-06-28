@@ -9,10 +9,23 @@
 <p th:text="${'Name: '+ user.getName()}"></p>
 <p th:text="${'Date of birth: ' + user.getYear()}"></p>
 <br>
-<a th:href="@{/users/{id}/edit(id=${user.getId()})}">Редактировать</a>
+<div th:if="${books.isEmpty()}">
+    <p>The man hasn't picked up any books yet</p>
+    <hr/>
+</div>
+<div th:if="${!books.isEmpty()}">
+    <hr/>
+    <b>Books:</b>
+    <br/>
+    <table th:each="book : ${books}">
+        <tr th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getYear()}">book</tr>
+    </table>
+    <hr/>
+</div>
+<a th:href="@{/users/{id}/edit(id=${user.getId()})}">Edit</a>
 <br>
 <form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
-    <input type="submit" value="УДАЛИТЬ">
+    <input type="submit" value="DELETE">
 </form>
 </body>
 </html>

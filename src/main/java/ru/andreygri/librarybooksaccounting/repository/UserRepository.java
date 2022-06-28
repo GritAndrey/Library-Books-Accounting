@@ -2,6 +2,7 @@ package ru.andreygri.librarybooksaccounting.repository;
 
 
 
+import ru.andreygri.librarybooksaccounting.model.Book;
 import ru.andreygri.librarybooksaccounting.model.User;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface UserRepository {
     User get(int id);
 
     List<User> getAll();
+
+   List<Book> getUserBooks(int id);
 }

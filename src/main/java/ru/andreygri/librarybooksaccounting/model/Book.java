@@ -4,7 +4,6 @@ public class Book extends AbstractNamedEntity {
 
     private String author;
     private int year;
-    private Integer userId = null;
 
     public Book(Integer id, String name, String author, int year) {
         super(id, name);
@@ -15,13 +14,6 @@ public class Book extends AbstractNamedEntity {
     public Book() {
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
 
     public String getAuthor() {
         return author;
@@ -45,7 +37,6 @@ public class Book extends AbstractNamedEntity {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", year='" + year + '\'' +
-                ", userId='" + userId + '\'' +
                 '}';
     }
 }
