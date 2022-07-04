@@ -16,7 +16,7 @@ public class Book extends AbstractNamedEntity {
     @Column(name = "year")
     private int year;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User owner;
 
