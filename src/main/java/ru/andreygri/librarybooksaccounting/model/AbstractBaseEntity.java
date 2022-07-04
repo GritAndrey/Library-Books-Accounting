@@ -1,11 +1,16 @@
 package ru.andreygri.librarybooksaccounting.model;
 
+import jakarta.persistence.*;
 import org.springframework.util.Assert;
 
-
+@MappedSuperclass
+// http://stackoverflow.com/questions/594597/hibernate-annotations-which-is-better-field-or-property-access
+@Access(AccessType.FIELD)
 public abstract class AbstractBaseEntity {
     public static final int START_SEQ = 100000;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
+    @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
     protected Integer id;
 
     protected AbstractBaseEntity() {
@@ -33,8 +38,8 @@ public abstract class AbstractBaseEntity {
     }
 
     @Override
-    public String toString() {
-        return getClass().getSimpleName() + ":" + id;
+    public int hashCode() {
+        return id == null ? 0 : id;
     }
 
     @Override
@@ -50,7 +55,7 @@ public abstract class AbstractBaseEntity {
     }
 
     @Override
-    public int hashCode() {
-        return id == null ? 0 : id;
+    public String toString() {
+        return getClass().getSimpleName() + ":" + id;
     }
 }

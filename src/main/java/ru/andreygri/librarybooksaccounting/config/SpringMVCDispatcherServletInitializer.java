@@ -22,16 +22,17 @@ public class SpringMVCDispatcherServletInitializer extends AbstractAnnotationCon
     }
 
     @Override
-    protected String[] getServletMappings() {
-        return new String[]{"/"};
-    }
-
-    @Override
-
     public void onStartup(ServletContext aServletContext) throws ServletException {
+        aServletContext.setInitParameter(
+                "spring.profiles.active", "jdbc");
         super.onStartup(aServletContext);
         registerCharacterEncodingFilter(aServletContext);
         registerHiddenFieldFilter(aServletContext);
+    }
+
+    @Override
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
     }
 
     private void registerHiddenFieldFilter(ServletContext aContext) {
