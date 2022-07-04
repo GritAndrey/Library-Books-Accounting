@@ -18,7 +18,9 @@
 
         <!--SPRING -->
         <spring.version>5.3.21</spring.version>
-
+        <!--ORM -->
+        <spring-data-jpa.version>2.7.1</spring-data-jpa.version>
+        <hibernate.version>6.1.1.Final</hibernate.version>
         <!--THYMELEAF -->
         <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
 
@@ -31,6 +33,7 @@
         <!-- DB -->
         <postgresql.version>42.4.0</postgresql.version>
     </properties>
+
     <!-- SPRING -->
     <dependencies>
         <dependency>
@@ -68,6 +71,17 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.1</version>
             <scope>provided</scope>
+        </dependency>
+        <!-- ORM -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${spring-data-jpa.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
         </dependency>
         <!-- hibernate-validator -->
         <dependency>
