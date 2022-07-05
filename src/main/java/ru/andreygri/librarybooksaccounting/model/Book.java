@@ -1,7 +1,6 @@
 package ru.andreygri.librarybooksaccounting.model;
 
-import jakarta.persistence.*;
-
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -16,8 +15,8 @@ public class Book extends AbstractNamedEntity {
     @Column(name = "year")
     private int year;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id",referencedColumnName = "id",nullable = false)
     private User owner;
 
     public Book(Integer id, String name, String author, int year) {

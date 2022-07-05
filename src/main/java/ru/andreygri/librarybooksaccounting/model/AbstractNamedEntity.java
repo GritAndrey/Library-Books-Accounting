@@ -1,8 +1,8 @@
 package ru.andreygri.librarybooksaccounting.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.MappedSuperclass;
 
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
