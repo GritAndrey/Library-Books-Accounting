@@ -1,6 +1,7 @@
 package ru.andreygri.librarybooksaccounting.repository.datajpa;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 import ru.andreygri.librarybooksaccounting.model.Book;
 import ru.andreygri.librarybooksaccounting.model.User;
@@ -8,7 +9,7 @@ import ru.andreygri.librarybooksaccounting.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
-
+@Profile("datajpa")
 @Repository
 public class DataJpaUserRepository implements UserRepository {
     private final CrudUserRepository repository;
@@ -20,31 +21,31 @@ public class DataJpaUserRepository implements UserRepository {
 
     @Override
     public User save(User user) {
-        return null;
+        return repository.save(user);
     }
 
     @Override
     public boolean delete(int id) {
-        return false;
+        return repository.delete(id) != 0;
     }
 
     @Override
     public User get(int id) {
-        return null;
+        return repository.findById(id).orElse(null);
     }
 
     @Override
     public List<User> getAll() {
-        return null;
+        return repository.findAll();
     }
 
     @Override
     public List<Book> getUserBooks(int id) {
-        return null;
+        return repository.findById(id).orElse(null).getOwnedBooks();
     }
 
     @Override
     public Optional<User> getUserByName(String name) {
-        return Optional.empty();
+        return repository.getUserByName(name);
     }
 }

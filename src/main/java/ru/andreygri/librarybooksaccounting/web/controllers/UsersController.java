@@ -17,40 +17,40 @@ import javax.validation.Valid;
 @RequestMapping("/users")
 public class UsersController {
     private static final Logger log = LoggerFactory.getLogger(UsersController.class);
-    private final UserRepository repository;
+    private final UserRepository service;
     private final UserValidator userValidator;
 
     @Autowired
-    public UsersController(UserRepository repository, UserValidator userValidator) {
-        this.repository = repository;
+    public UsersController(UserRepository service, UserValidator userValidator) {
+        this.service = service;
         this.userValidator = userValidator;
     }
 
     @GetMapping
     public String getAll(Model model) {
         log.info(" users getAll");
-        model.addAttribute("users", repository.getAll());
+        model.addAttribute("users", service.getAll());
         return "/users/index";
     }
 
     @GetMapping("/{id}")
     public String getById(@PathVariable int id, Model model) {
         log.info("users getById  Id: " + id);
-        model.addAttribute("user", repository.get(id));
-        model.addAttribute("books", repository.getUserBooks(id));
+        model.addAttribute("user", service.get(id));
+        model.addAttribute("books", service.getUserBooks(id));
         return "users/show";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable int id) {
-        log.info("DeleteMapping : " + repository.get(id));
-        repository.delete(id);
+        log.info("DeleteMapping : " + service.get(id));
+        service.delete(id);
         return "redirect:/users";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable int id, Model model) {
-        final User user = repository.get(id);
+        final User user = service.get(id);
         model.addAttribute("user", user);
         log.info("GetMapping(\"/{id}/edit\")" + user);
         return "/users/edit";
@@ -66,7 +66,7 @@ public class UsersController {
             return "/users/edit";
         }
         log.info("Edit user" + user);
-        repository.save(user);
+        service.save(user);
         return "redirect:/users";
     }
 
@@ -82,7 +82,7 @@ public class UsersController {
         if (bindingResult.hasErrors()) {
             return "/books/new";
         }
-        repository.save(user);
+        service.save(user);
         return "redirect:/users";
     }
 }
