@@ -1,27 +1,24 @@
 package ru.andreygri.librarybooksaccounting.repository;
 
-
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.andreygri.librarybooksaccounting.model.Book;
 import ru.andreygri.librarybooksaccounting.model.User;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface BookRepository {
-    // null if not found, when updated
-    Book save(Book book);
+@Repository
+public interface BookRepository extends JpaRepository<Book, Integer> {
+    @Transactional
+    @Modifying
+    @Query("""
+            DELETE FROM Book b WHERE b.id=:id
+            """)
+    int delete(@Param("id") int id);
 
-    // false if not found
-    boolean delete(int id);
-
-    // null if not found
-    Book get(int id);
-
-    List<Book> getAll();
-
-    Optional<User> getBookOwner(int id);
-
-    void assign(int id, User user);
-
-    void release(int id);
+    List<Book> findAllByOwner(User user);
 }

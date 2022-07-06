@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.andreygri.librarybooksaccounting.model.User;
-import ru.andreygri.librarybooksaccounting.repository.UserRepository;
+import ru.andreygri.librarybooksaccounting.services.UserService;
 import ru.andreygri.librarybooksaccounting.util.UserValidator;
 
 import javax.validation.Valid;
@@ -17,11 +17,11 @@ import javax.validation.Valid;
 @RequestMapping("/users")
 public class UsersController {
     private static final Logger log = LoggerFactory.getLogger(UsersController.class);
-    private final UserRepository service;
+    private final UserService service;
     private final UserValidator userValidator;
 
     @Autowired
-    public UsersController(UserRepository service, UserValidator userValidator) {
+    public UsersController(UserService service, UserValidator userValidator) {
         this.service = service;
         this.userValidator = userValidator;
     }

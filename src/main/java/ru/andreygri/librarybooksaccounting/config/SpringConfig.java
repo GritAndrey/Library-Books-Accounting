@@ -2,11 +2,12 @@ package ru.andreygri.librarybooksaccounting.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -23,7 +24,7 @@ import javax.sql.DataSource;
 import java.util.Objects;
 import java.util.Properties;
 
-@EnableJpaRepositories("ru.andreygri.librarybooksaccounting.repository.datajpa")
+@EnableJpaRepositories("ru.andreygri.librarybooksaccounting.repository")
 @ComponentScan("ru.andreygri.librarybooksaccounting")
 @PropertySource("classpath:db/postgres.properties")
 @EnableWebMvc
@@ -75,18 +76,6 @@ public class SpringConfig implements WebMvcConfigurer {
         return dataSource;
     }
 
-    @Bean
-    @Profile("jdbc")
-    public JdbcTemplate jdbcTemplate() {
-        return new JdbcTemplate(dataSource());
-    }
-
-    @Profile("jdbc")
-    @Bean
-    public NamedParameterJdbcTemplate namedParameterJdbcTemplate() {
-        return new NamedParameterJdbcTemplate(jdbcTemplate());
-    }
-
     Properties hibernateProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
@@ -96,8 +85,8 @@ public class SpringConfig implements WebMvcConfigurer {
         properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
         return properties;
     }
+
     @Bean
-    @Profile("datajpa")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
@@ -110,7 +99,6 @@ public class SpringConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    @Profile("datajpa")
     public PlatformTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
