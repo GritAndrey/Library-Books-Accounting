@@ -10,7 +10,6 @@ import ru.andreygri.librarybooksaccounting.model.Book;
 import ru.andreygri.librarybooksaccounting.model.User;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer> {
@@ -21,8 +20,5 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
             """)
     int delete(@Param("id") int id);
 
-
     List<Book> findAllByOwner(User user);
-
-    Book findBookById(int id);
 }

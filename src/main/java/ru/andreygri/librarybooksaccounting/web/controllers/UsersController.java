@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.andreygri.librarybooksaccounting.model.User;
-import ru.andreygri.librarybooksaccounting.repository.UserRepository;
 import ru.andreygri.librarybooksaccounting.services.UserService;
 import ru.andreygri.librarybooksaccounting.util.UserValidator;
 

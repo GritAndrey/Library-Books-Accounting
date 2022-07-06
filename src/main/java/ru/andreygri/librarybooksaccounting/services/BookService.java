@@ -44,17 +44,15 @@ public class BookService {
 
     @Transactional
     public void assign(int id, User user) {
-        final Book book = bookRepository.findBookById(id);
+        final Book book = bookRepository.getReferenceById(id);
         book.setOwner(user);
-        book.setId(id);
         bookRepository.save(book);
     }
 
     @Transactional
     public void release(int id) {
-        final Book book = bookRepository.findBookById(id);
+        final Book book = bookRepository.getReferenceById(id);
         book.setOwner(null);
-        book.setId(id);
         bookRepository.save(book);
     }
 }

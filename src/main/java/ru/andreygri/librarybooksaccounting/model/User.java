@@ -3,18 +3,13 @@ package ru.andreygri.librarybooksaccounting.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
 public class User extends AbstractNamedEntity {
     @Column(name = "year")
     private int year;
-
-//    @OneToMany(mappedBy = "owner")
-//    private List<Book> ownedBooks;
 
     public User() {
     }
