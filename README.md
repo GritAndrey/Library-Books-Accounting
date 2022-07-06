@@ -16,6 +16,7 @@ books and free books.
 ## ✨Tech✨
 - Spring MVC
 - JDBCTemplate
+- Spring Data JPA
 - Thymeleaf
 - Logging with SLF4J & LogBack
 - Hibernate validator
