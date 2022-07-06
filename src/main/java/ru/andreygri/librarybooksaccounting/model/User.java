@@ -12,8 +12,9 @@ import java.util.List;
 public class User extends AbstractNamedEntity {
     @Column(name = "year")
     private int year;
-    @OneToMany(mappedBy = "owner")
-    private List<Book> ownedBooks;
+
+//    @OneToMany(mappedBy = "owner")
+//    private List<Book> ownedBooks;
 
     public User() {
     }
@@ -21,14 +22,6 @@ public class User extends AbstractNamedEntity {
     public User(Integer id, String name, int year) {
         super(id, name);
         this.year = year;
-    }
-
-    public List<Book> getOwnedBooks() {
-        return ownedBooks;
-    }
-
-    public void setOwnedBooks(List<Book> ownedBooks) {
-        this.ownedBooks = ownedBooks;
     }
 
     public int getYear() {

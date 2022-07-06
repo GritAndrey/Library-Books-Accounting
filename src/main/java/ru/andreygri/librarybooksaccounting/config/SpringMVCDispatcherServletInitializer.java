@@ -23,8 +23,8 @@ public class SpringMVCDispatcherServletInitializer extends AbstractAnnotationCon
 
     @Override
     public void onStartup(ServletContext aServletContext) throws ServletException {
-        aServletContext.setInitParameter(
-                "spring.profiles.active", "jdbc");
+/*        aServletContext.setInitParameter(
+                "spring.profiles.active", "datajpa");*/
         super.onStartup(aServletContext);
         registerCharacterEncodingFilter(aServletContext);
         registerHiddenFieldFilter(aServletContext);

@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.andreygri.librarybooksaccounting.model.Book;
 import ru.andreygri.librarybooksaccounting.model.User;
-import ru.andreygri.librarybooksaccounting.repository.UserRepository;
 import ru.andreygri.librarybooksaccounting.services.BookService;
 import ru.andreygri.librarybooksaccounting.services.UserService;
 
@@ -39,7 +38,6 @@ public class BooksController {
     @GetMapping("/{id}")
     public String getById(@PathVariable int id, Model model, @ModelAttribute("user") User user) {
         model.addAttribute("book", bookService.get(id));
-        log.info("books getById  Id: " + id + " " + bookService.get(id));
         Optional<User> bookOwner = bookService.getBookOwner(id);
 
         if (bookOwner.isPresent())
