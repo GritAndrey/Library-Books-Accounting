@@ -1,4 +1,3 @@
-
 DROP TABLE IF EXISTS book;
 DROP TABLE IF EXISTS users;
 DROP SEQUENCE IF EXISTS global_seq;
@@ -14,11 +13,12 @@ CREATE TABLE users
 
 CREATE TABLE book
 (
-    id        INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-    title     VARCHAR(100) NOT NULL,
-    author    VARCHAR(100) NOT NULL,
-    year      INTEGER      NOT NULL,
-    user_id INTEGER REFERENCES users (id) ON DELETE SET NULL
+    id       INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+    name    VARCHAR(100) NOT NULL,
+    author   VARCHAR(100) NOT NULL,
+    year     INTEGER      NOT NULL,
+    taken_at TIMESTAMP,
+    user_id  INTEGER      REFERENCES users (id) ON DELETE SET NULL
 );
 
 
