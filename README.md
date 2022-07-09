@@ -12,6 +12,9 @@ books and free books.
   go to book's page
 - A person's page showing the values of his fields and a list of the books he took.
 - A page of a book showing the details of that book and the person's name, who took this book.
+- Search page. Search by first letters of book title.
+- Page pagination
+- The book is considered overdue if taken more than 10 days ago.
 
 ## ✨Tech✨
 - Spring MVC
