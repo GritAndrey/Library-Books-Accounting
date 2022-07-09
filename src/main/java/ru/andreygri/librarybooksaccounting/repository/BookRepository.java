@@ -21,4 +21,6 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     int delete(@Param("id") int id);
 
     List<Book> findAllByOwner(User user);
+
+    List<Book> findByNameStartingWith(String startName);
 }
